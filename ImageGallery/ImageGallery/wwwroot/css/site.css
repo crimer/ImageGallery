@@ -69,3 +69,37 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.gallery__list{
+    padding: 24px;
+    width: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill,minmax(300px, 320px));
+}
+.image {
+    display: flex;
+    flex-direction: column;
+}
+.image__wrap {
+    padding: 8px;
+    background: #fff;
+    border-radius: 5px;
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    box-shadow: 0 10px 18px rgba(0,0,0,.2), 0 5px 5px rgba(0,0,0,.2);
+}
+
+.image__tag-list{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    justify-content: space-evenly;
+}
+.image__tag{
+    list-style: none;
+}
