@@ -107,3 +107,9 @@ body {
 .image__tag{
     list-style: none;
 }
+.image-detail img{
+    max-width: 700px;
+}
+.detail-image-info p:not(:last-child) {
+    margin-bottom: 10px;
+}

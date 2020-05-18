@@ -2,8 +2,6 @@
 using ImageGallery.Data.Models;
 using ImageGallery.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace ImageGallery.Controllers
 {
@@ -30,6 +28,11 @@ namespace ImageGallery.Controllers
             // вернул в представление ViewModel
             return View(model);
         }
-
+        public IActionResult Detail(int id)
+        {
+            Image image = _imageService.GetById(id);
+            DetailVM vm = new DetailVM(image);
+            return View(vm);
+        }
     }
 }

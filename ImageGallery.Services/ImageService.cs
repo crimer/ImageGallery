@@ -35,7 +35,7 @@ namespace ImageGallery.Services
 
         public Image GetById(int id)
         {
-            return _ctx.Images.Find(id);
+            return GetAll().Where(img => img.Id == id).First();
         }
 
         public IEnumerable<Image> GetWithTag(string tag)

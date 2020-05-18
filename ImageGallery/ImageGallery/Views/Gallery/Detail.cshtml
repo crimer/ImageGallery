@@ -1,0 +1,16 @@
+﻿@model ImageGallery.ViewModels.DetailVM
+
+<div class="container body-content gallery">
+    <div class="row image-detail-container">
+        <div class="image-detail">
+            <img src="@Model.Url" alt="@Model.Title" />
+        </div>
+    </div>
+    <div class="row detail-image-info">
+        <p>Title: @Model.Title</p>
+        <p>Uploaded: @Model.CreatedOn</p>
+    </div>
+    <div class="row">
+        <a class="btn btn-primary" asp-controller="Gallery" asp-action="Index">Back to Gallery</a>
+    </div>
+</div>
