@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const uploadForm = document.querySelector('#uploadForm');
+const imagePreview = uploadForm.querySelector('#image-preview img');
+const inputImage = uploadForm.querySelector("#inputImage");
 
-// Write your JavaScript code.
+inputImage.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.addEventListener("load", function () {
+            imagePreview.setAttribute('src', this.result)
+        })
+        reader.readAsDataURL(file);
+    }
+});

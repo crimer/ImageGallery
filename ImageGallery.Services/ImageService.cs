@@ -19,7 +19,8 @@ namespace ImageGallery.Services
 
         public void AddImage(Image newImage)
         {
-            throw new NotImplementedException();
+            _ctx.Add(newImage);
+            _ctx.SaveChanges();
         }
 
         public void DeleteImage(int id)

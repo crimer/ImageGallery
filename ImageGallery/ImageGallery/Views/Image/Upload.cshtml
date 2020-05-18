@@ -1,0 +1,30 @@
+﻿@model ImageGallery.ViewModels.UploadVM
+<div class="container body-content">
+    <div class="row upload-container">
+        <div class="upload-form drop-shadow">
+            <form asp-action="UploadNewImage" asp-controller="Image" method="post" 
+                  enctype="multipart/form-data" id="uploadForm">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" name="Title" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tags"></label>
+                    <input asp-for="Tags" name="Tags" class="form-control"/>
+                </div>
+                <div class="d-flex">
+                    <label class="btn btn-success h-25 mr-3">
+                        Browse for Image
+                        <input type="file" id="inputImage" name="ImageUploaded" style="display: none;"/>
+                    </label>
+                    <button type="submit" class="btn btn-info h-25" id="button-submit">
+                        Submit
+                    </button>
+                </div>
+                <div class="image-preview" id="image-preview">
+                    <img />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

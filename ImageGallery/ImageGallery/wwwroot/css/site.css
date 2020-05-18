@@ -84,6 +84,9 @@ body {
 .gallery__list a:not(:last-child) {
     margin-right: 40px;
 }
+.gallery__list a{
+    text-decoration: none;
+}
 .image__wrap {
     padding: 8px;
     background: #fff;
@@ -93,10 +96,21 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    box-shadow: 0 10px 18px rgba(0,0,0,.2), 0 5px 5px rgba(0,0,0,.2);
+    
 }
-
-.image__tag-list{
+.drop-shadow {
+    box-shadow: 0 10px 18px rgba(0,0,0,.2), 0 5px 5px rgba(0,0,0,.2);
+    border-radius: 10px;
+}
+.upload-form{
+    width: 65%;
+    padding: 20px;
+    margin: 0 auto;
+}
+.upload-form form{
+    width: 100%;
+}
+.image__tag-list {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
@@ -110,6 +124,14 @@ body {
 .image-detail img{
     max-width: 700px;
 }
-.detail-image-info p:not(:last-child) {
-    margin-bottom: 10px;
+.detail-image-info{
+    margin: 20px 0;
+}
+.image-preview{
+    width: 100%;
+    height: auto;
+}
+.image-preview img{
+    width: 100%;
+    height: auto;
 }
