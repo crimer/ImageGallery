@@ -4,18 +4,19 @@
     <div class="gallery__list">
         @foreach (var image in Model.Images)
         {
-            <div class="gallery__image image">
-                <div class="image__wrap" style="background-image: url(@image.ImageUrl);">
-                    @*<img src="@image.ImageUrl"/>*@
+            <a asp-controller="Gallery" asp-action="Detail" asp-route-id="@image.Id">
+                <div class="gallery__image image">
+                    <div class="image__wrap" style="background-image: url(@image.ImageUrl);">
+                    </div>
+                    <h2 class="image__title">@image.Title</h2>
+                    <ul class="image__tag-list">
+                        @foreach(var tag in image.Tags)
+                        {
+                            <li class="image__tag">@tag.Description</li>
+                        }
+                    </ul>
                 </div>
-                <h2 class="image__title">@image.Title</h2>
-                <ul class="image__tag-list">
-                    @foreach(var tag in image.Tags)
-                    {
-                        <li class="image__tag">@tag.Description</li>
-                    }
-                </ul>
-            </div>
+            </a>
         }
     </div>
 </div>

@@ -72,13 +72,17 @@ body {
 .gallery__list{
     padding: 24px;
     width: 100%;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill,minmax(300px, 320px));
+    display: flex;
+    flex-flow: row wrap;
 }
 .image {
+    /*height: 300px;*/
+    width: 300px;
     display: flex;
     flex-direction: column;
+}
+.gallery__list a:not(:last-child) {
+    margin-right: 40px;
 }
 .image__wrap {
     padding: 8px;
