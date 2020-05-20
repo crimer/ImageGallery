@@ -5,11 +5,12 @@
 <div class="container body-content">
     <div class="row upload-container">
         <div class="upload-form drop-shadow">
-            <form asp-action="UploadNewImage" asp-controller="Image" method="post"
+            <form asp-action="Upload" asp-controller="Image" method="post"
                   enctype="multipart/form-data" id="uploadForm">
                 <div class="form-group">
                     <label asp-for="Title"></label>
                     <input asp-for="Title" name="Title" class="form-control" />
+                    <span asp-validation-for="Title"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Tags"></label>
@@ -20,10 +21,12 @@
                         Browse for Image
                         <input type="file" id="inputImage" name="ImageUploaded" style="display: none;" />
                     </label>
-                    <button type="submit" class="btn btn-info h-25" id="button-submit">
-                        Submit
-                    </button>
+                    <span asp-validation-for="ImageUploaded"></span>
                 </div>
+                <button type="submit" class="btn btn-info h-25 mb-3" id="button-submit">
+                    Submit
+                </button>
+                
                 <div class="image-preview" id="image-preview">
                     <img />
                 </div>
