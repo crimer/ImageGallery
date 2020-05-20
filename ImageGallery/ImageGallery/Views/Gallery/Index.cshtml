@@ -1,5 +1,7 @@
 ﻿@model ImageGallery.ViewModels.GalleryVM
-
+@{
+    ViewData["Title"] = "Gallery";
+}
 @if (TempData["message"] != null)
 {
     <div class="alert alert-success" role="alert">
@@ -12,6 +14,13 @@
 
 <div class="container body-content gallery">
     <div class="gallery__list">
+        @if (!Model.Images.Any())
+        {
+            <h1>It looks like there are no images in the gallery</h1>
+            <a class="btn btn-primary" asp-controller="Image" asp-action="Upload">
+                Don't want to add an image?
+            </a>
+        }
         @foreach (var image in Model.Images)
         {
             <a asp-controller="Gallery" asp-action="Detail" asp-route-id="@image.Id">
@@ -20,7 +29,7 @@
                     </div>
                     <h2 class="image__title">@image.Title</h2>
                     <ul class="image__tag-list">
-                        @foreach(var tag in image.Tags)
+                        @foreach (var tag in image.Tags)
                         {
                             <li class="image__tag">@tag.Description</li>
                         }

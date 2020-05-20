@@ -12,7 +12,7 @@ namespace ImageGallery.Controllers
         {
             _imageService = imageServece;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
             // заполнил список картинок
@@ -28,9 +28,18 @@ namespace ImageGallery.Controllers
             // вернул в представление ViewModel
             return View(model);
         }
-        public IActionResult Detail(int id)
+        [HttpGet]
+        public IActionResult Detail(int? id)
         {
+            if(id == null)
+            {
+                return RedirectToAction("Index");
+            }
             Image image = _imageService.GetById(id);
+            if(image == null)
+            {
+                return RedirectToAction("Index");
+            }
             DetailVM vm = new DetailVM(image);
             return View(vm);
         }

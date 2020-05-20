@@ -11,7 +11,7 @@ namespace ImageGallery.Data
     {
         IEnumerable<Image> GetAll();
         IEnumerable<Image> GetWithTag(string tag);
-        Image GetById(int id);
+        Image GetById(int? id);
         void AddImage(Image newImage);
         void DeleteImage(int id);
     }

@@ -1,13 +1,10 @@
 ﻿using ImageGallery.Data;
 using ImageGallery.Data.Models;
 using ImageGallery.ViewModels;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ImageGallery.Controllers
@@ -15,21 +12,30 @@ namespace ImageGallery.Controllers
     public class ImageController : Controller
     {
         private readonly IImage _imageService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ImageController(IImage imageService)
+        public ImageController(IImage imageService, IWebHostEnvironment webHost)
         {
             _imageService = imageService;
+            _webHostEnvironment = webHost;
         }
-
+        [HttpGet]
         public IActionResult Upload()
         {
-            var vm = new UploadVM();
+            //Image image = _imageService.GetById(id);
+            //if(!image)
+            UploadVM vm = new UploadVM();
             return View(vm);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadNewImage(UploadVM uploadVM)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(uploadVM);
+            }
             Image newImage = new Image()
             {
                 Title = uploadVM.Title,
@@ -38,7 +44,7 @@ namespace ImageGallery.Controllers
             };
             if (uploadVM.ImageUploaded != null && uploadVM.ImageUploaded.Length > 0)
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\gallery\\", uploadVM.ImageUploaded.FileName);
+                string path = Path.Combine(_webHostEnvironment.ContentRootPath, "wwwroot\\images\\gallery\\", uploadVM.ImageUploaded.FileName);
 
                 using (var fStream = new FileStream(path, FileMode.Create))
                 {
@@ -48,7 +54,34 @@ namespace ImageGallery.Controllers
             _imageService.AddImage(newImage);
 
             TempData["message"] = $"Image \"{uploadVM.Title}\" has benn added to gallery";
-            return RedirectToAction("Index","Gallery");
+            return RedirectToAction("Index", "Gallery");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteImage(int id)
+        {
+            _imageService.DeleteImage(id);
+            return RedirectToAction("Index", "Gallery");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditImage(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Image image = _imageService.GetById(id);
+            
+            if(image != null)
+                return RedirectToAction("Index", "Gallery");
+
+            return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditImage(UploadVM uploadVM)
+        {
+            return RedirectToAction("Index", "Gallery");
         }
     }
 }

@@ -25,7 +25,9 @@ namespace ImageGallery.Services
 
         public void DeleteImage(int id)
         {
-            throw new NotImplementedException();
+            var image = GetById(id);
+            _ctx.Remove(image);
+            _ctx.SaveChanges();
         }
 
         public IEnumerable<Image> GetAll()
@@ -34,9 +36,9 @@ namespace ImageGallery.Services
             return _ctx.Images.Include(img => img.Tags);
         }
 
-        public Image GetById(int id)
+        public Image GetById(int? id)
         {
-            return GetAll().Where(img => img.Id == id).First();
+            return GetAll().Where(img => img.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<Image> GetWithTag(string tag)

@@ -1,5 +1,7 @@
 ﻿@model ImageGallery.ViewModels.DetailVM
-
+@{
+    ViewData["Title"] = "Detail";
+}
 <div class="container body-content gallery">
     <div class="row image-detail-container">
         <div class="image-detail">
@@ -10,6 +12,17 @@
         <span>Title: @Model.Title</span>
         <br />
         <span>Uploaded: @Model.CreatedOn</span>
+    </div>
+    <div class="row mb-3">
+        <form asp-controller="Image" asp-action="DeleteImage" method="post">
+            <input type="hidden" value="@Model.Id" name="id"/>
+            <button type="submit" class="btn btn-danger mr-2">
+                Delete from Gallery
+            </button>
+        </form>
+        <a class="btn btn-info" asp-action="EditImage" asp-controller="Image" asp-route-id="@Model.Id">
+            Edit image
+        </a>
     </div>
     <div class="row">
         <a class="btn btn-primary" asp-controller="Gallery" asp-action="Index">Back to Gallery</a>
